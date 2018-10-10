@@ -42,15 +42,35 @@
             this.txtHostName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtRoutingKey = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.txtExchangeName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtRoutingKey = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lbxQueues = new System.Windows.Forms.ListBox();
+            this.btnUnsubscribe = new System.Windows.Forms.Button();
+            this.btnSubscribe = new System.Windows.Forms.Button();
+            this.txtSubscribeQueueName = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnReadMessage = new System.Windows.Forms.Button();
+            this.txtReadQueueName = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dgvMessages = new System.Windows.Forms.DataGridView();
+            this.colQueueName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtReceivedMessageContent = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPortNo)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -83,6 +103,7 @@
             this.btnDisconnect.TabIndex = 12;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // btnConnect
             // 
@@ -204,6 +225,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Send Message";
             // 
+            // txtRoutingKey
+            // 
+            this.txtRoutingKey.Location = new System.Drawing.Point(102, 46);
+            this.txtRoutingKey.Name = "txtRoutingKey";
+            this.txtRoutingKey.Size = new System.Drawing.Size(159, 20);
+            this.txtRoutingKey.TabIndex = 10;
+            this.txtRoutingKey.Text = "payment";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 50);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Routing key";
+            // 
             // btnSend
             // 
             this.btnSend.Location = new System.Drawing.Point(15, 152);
@@ -239,38 +277,194 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Exchange name";
             // 
-            // txtRoutingKey
+            // groupBox3
             // 
-            this.txtRoutingKey.Location = new System.Drawing.Point(102, 46);
-            this.txtRoutingKey.Name = "txtRoutingKey";
-            this.txtRoutingKey.Size = new System.Drawing.Size(159, 20);
-            this.txtRoutingKey.TabIndex = 10;
-            this.txtRoutingKey.Text = "payment";
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.lbxQueues);
+            this.groupBox3.Controls.Add(this.btnUnsubscribe);
+            this.groupBox3.Controls.Add(this.btnSubscribe);
+            this.groupBox3.Controls.Add(this.txtSubscribeQueueName);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Location = new System.Drawing.Point(12, 206);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(300, 248);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Subscribe/Unsubscribe queue";
             // 
-            // label7
+            // label9
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 50);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Routing key";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 85);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(98, 13);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Subscribed queues";
+            // 
+            // lbxQueues
+            // 
+            this.lbxQueues.FormattingEnabled = true;
+            this.lbxQueues.IntegralHeight = false;
+            this.lbxQueues.Location = new System.Drawing.Point(16, 104);
+            this.lbxQueues.Name = "lbxQueues";
+            this.lbxQueues.Size = new System.Drawing.Size(246, 99);
+            this.lbxQueues.TabIndex = 11;
+            this.lbxQueues.SelectedIndexChanged += new System.EventHandler(this.lbxQueues_SelectedIndexChanged);
+            // 
+            // btnUnsubscribe
+            // 
+            this.btnUnsubscribe.Enabled = false;
+            this.btnUnsubscribe.Location = new System.Drawing.Point(16, 214);
+            this.btnUnsubscribe.Name = "btnUnsubscribe";
+            this.btnUnsubscribe.Size = new System.Drawing.Size(246, 23);
+            this.btnUnsubscribe.TabIndex = 10;
+            this.btnUnsubscribe.Text = "Unsubscribe";
+            this.btnUnsubscribe.UseVisualStyleBackColor = true;
+            this.btnUnsubscribe.Click += new System.EventHandler(this.btnUnsubscribe_Click);
+            // 
+            // btnSubscribe
+            // 
+            this.btnSubscribe.Location = new System.Drawing.Point(16, 51);
+            this.btnSubscribe.Name = "btnSubscribe";
+            this.btnSubscribe.Size = new System.Drawing.Size(246, 23);
+            this.btnSubscribe.TabIndex = 9;
+            this.btnSubscribe.Text = "Subscribe";
+            this.btnSubscribe.UseVisualStyleBackColor = true;
+            this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
+            // 
+            // txtSubscribeQueueName
+            // 
+            this.txtSubscribeQueueName.Location = new System.Drawing.Point(91, 23);
+            this.txtSubscribeQueueName.Name = "txtSubscribeQueueName";
+            this.txtSubscribeQueueName.Size = new System.Drawing.Size(171, 20);
+            this.txtSubscribeQueueName.TabIndex = 6;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(13, 27);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Queue name";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txtReceivedMessageContent);
+            this.groupBox4.Controls.Add(this.dgvMessages);
+            this.groupBox4.Location = new System.Drawing.Point(613, 12);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(331, 442);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Received messages";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnReadMessage);
+            this.groupBox5.Controls.Add(this.txtReadQueueName);
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Location = new System.Drawing.Point(326, 206);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(281, 248);
+            this.groupBox5.TabIndex = 8;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Manual read message";
+            // 
+            // btnReadMessage
+            // 
+            this.btnReadMessage.Location = new System.Drawing.Point(15, 51);
+            this.btnReadMessage.Name = "btnReadMessage";
+            this.btnReadMessage.Size = new System.Drawing.Size(246, 23);
+            this.btnReadMessage.TabIndex = 12;
+            this.btnReadMessage.Text = "Read Message";
+            this.btnReadMessage.UseVisualStyleBackColor = true;
+            this.btnReadMessage.Click += new System.EventHandler(this.btnReadMessage_Click);
+            // 
+            // txtReadQueueName
+            // 
+            this.txtReadQueueName.Location = new System.Drawing.Point(90, 23);
+            this.txtReadQueueName.Name = "txtReadQueueName";
+            this.txtReadQueueName.Size = new System.Drawing.Size(171, 20);
+            this.txtReadQueueName.TabIndex = 11;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 27);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(68, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Queue name";
+            // 
+            // dgvMessages
+            // 
+            this.dgvMessages.AllowUserToAddRows = false;
+            this.dgvMessages.AllowUserToDeleteRows = false;
+            this.dgvMessages.AllowUserToOrderColumns = true;
+            this.dgvMessages.AllowUserToResizeRows = false;
+            this.dgvMessages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMessages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colQueueName,
+            this.colMessage});
+            this.dgvMessages.Location = new System.Drawing.Point(6, 24);
+            this.dgvMessages.Name = "dgvMessages";
+            this.dgvMessages.RowHeadersVisible = false;
+            this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMessages.Size = new System.Drawing.Size(319, 244);
+            this.dgvMessages.TabIndex = 0;
+            this.dgvMessages.SelectionChanged += new System.EventHandler(this.dgvMessages_SelectionChanged);
+            // 
+            // colQueueName
+            // 
+            this.colQueueName.DataPropertyName = "Queue";
+            this.colQueueName.HeaderText = "Queue";
+            this.colQueueName.Name = "colQueueName";
+            this.colQueueName.ReadOnly = true;
+            // 
+            // colMessage
+            // 
+            this.colMessage.DataPropertyName = "Message";
+            this.colMessage.HeaderText = "Message";
+            this.colMessage.Name = "colMessage";
+            this.colMessage.ReadOnly = true;
+            this.colMessage.Width = 190;
+            // 
+            // txtReceivedMessageContent
+            // 
+            this.txtReceivedMessageContent.Location = new System.Drawing.Point(6, 279);
+            this.txtReceivedMessageContent.Multiline = true;
+            this.txtReceivedMessageContent.Name = "txtReceivedMessageContent";
+            this.txtReceivedMessageContent.ReadOnly = true;
+            this.txtReceivedMessageContent.Size = new System.Drawing.Size(319, 152);
+            this.txtReceivedMessageContent.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 463);
+            this.ClientSize = new System.Drawing.Size(956, 466);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "RabbitMQ Test";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPortNo)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -297,6 +491,22 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtRoutingKey;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnUnsubscribe;
+        private System.Windows.Forms.Button btnSubscribe;
+        private System.Windows.Forms.TextBox txtSubscribeQueueName;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox lbxQueues;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnReadMessage;
+        private System.Windows.Forms.TextBox txtReadQueueName;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridView dgvMessages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQueueName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMessage;
+        private System.Windows.Forms.TextBox txtReceivedMessageContent;
     }
 }
 

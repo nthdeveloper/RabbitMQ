@@ -14,7 +14,7 @@ namespace RabbitMQTest
     class QueueMessageEventArgs
     {
         public string QueueName { get; set; }
-        public byte[] MessageData { get; set; }
+        public string MessageData { get; set; }
         public bool IsProcessed { get; set; }
     }
 
@@ -42,7 +42,7 @@ namespace RabbitMQTest
             channel = conn.CreateModel();
         }
 
-        private void Disconnect()
+        public void Disconnect()
         {
             foreach (var consumerPair in m_ConsumerList)
             {
@@ -63,7 +63,7 @@ namespace RabbitMQTest
 
         public void SendMessage(string exchangeName, string routingKey, string msg)
         {
-            if (channel != null)
+            if (channel == null)
                 throw new Exception("Not connected");
 
             byte[] messageBodyBytes = System.Text.Encoding.UTF8.GetBytes(msg);
@@ -73,7 +73,7 @@ namespace RabbitMQTest
 
         public void SendMessageAdvanced(string exchangeName, string routingKey, string msg)
         {
-            if (channel != null)
+            if (channel == null)
                 throw new Exception("Not connected");
 
             byte[] messageBodyBytes = System.Text.Encoding.UTF8.GetBytes(msg);
@@ -93,7 +93,7 @@ namespace RabbitMQTest
 
         public string ReadFromQueue(string queueName)
         {
-            if (channel != null)
+            if (channel == null)
                 throw new Exception("Not connected");
 
             bool noAck = false;
@@ -114,7 +114,7 @@ namespace RabbitMQTest
 
         public void SubscribeToQueue(string queueName)
         {
-            if (channel != null)
+            if (channel == null)
                 throw new Exception("Not connected");
 
             if (m_ConsumerList.ContainsKey(queueName))
@@ -127,7 +127,7 @@ namespace RabbitMQTest
                 QueueMessageEventArgs _e = new QueueMessageEventArgs()
                 {
                     QueueName = queueName,
-                    MessageData = ea.Body
+                    MessageData = System.Text.Encoding.UTF8.GetString(ea.Body)
                 };
 
                 MessageReceived?.Invoke(this, _e);
