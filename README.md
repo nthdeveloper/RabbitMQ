@@ -1,6 +1,6 @@
 # RabbitMQ Test Application
 
-Simple usage tests for RabbitMQ. Developed with official RabbitMQ.Client library.
+Simple usage tests for RabbitMQ. Developed with official [RabbitMQ.Client](https://www.nuget.org/packages/RabbitMQ.Client) library.
 
 ![Screenshot](/images/screenshot.png)
 
