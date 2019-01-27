@@ -2,6 +2,8 @@
 
 Simple usage tests for RabbitMQ. Developed with official RabbitMQ.Client library.
 
+![Screenshot](/images/screenshot.png)
+
 ## Tested Features
 - Connecting and disconnecting to RabbitMQ server
 - Sending messages with a routing key to an exchange
